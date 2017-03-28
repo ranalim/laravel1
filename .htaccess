@@ -1,0 +1,4 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^$ http://localhost:8181/laravel/blog1/public/home [L]
+</IfModule>
