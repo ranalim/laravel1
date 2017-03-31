@@ -5,7 +5,10 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Post;
+use App\Tag;
 use Illuminate\Http\Request;
+//use Illuminate\Support\Facades\Log;
+use Log;
 use Session;
 
 //https://www.youtube.com/watch?v=_WUCOL-eV3o&index=11&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx
@@ -49,7 +52,11 @@ class PostController extends Controller {
 
 //        https://www.youtube.com/watch?v=Bo3m_h0QYkU&index=39&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx
         $categories = Category::all();
-        return view('posts.create')->withCategories($categories);
+
+//        https://www.youtube.com/watch?v=BNUYaLWdR04&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx&index=43
+        $tags = Tag::all();
+
+        return view('posts.create')->withCategories($categories)->withTags($tags);
 	}
 
     /**
@@ -60,7 +67,10 @@ class PostController extends Controller {
      */
 	public function store(Request $request)
 	{
-		//
+		//  https://www.youtube.com/watch?v=BNUYaLWdR04&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx&index=43 (multi select with select2)
+//TODO show all request in laravel
+//        dd($request);
+
 //        https://www.youtube.com/watch?v=5j3fgiaSK4E&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx&index=13
 
         // validate the data (how to prevent SQL injection)
@@ -82,6 +92,11 @@ class PostController extends Controller {
         $post->category_id = $request->category_id;
 
         $post->save();
+
+        //todo important
+        // saving many to many
+        // post_id -> post_tag table
+        $post->tags()->sync($request->tags, false);
 
 //        https://www.youtube.com/watch?v=-FMecyZs5Cg&index=15&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx
 //        Session::put();
@@ -129,8 +144,14 @@ class PostController extends Controller {
             $cats[$category->id] = $category->name;
         }
 
+        $tags = Tag::all();
+        $tags2 = array();
+        foreach ($tags as $tag){
+            $tags2[$tag->id] = $tag->name;
+        }
+
         // return the view and pass in the var we previously created
-        return view('posts.edit')->withPost($post)->withCategories($cats);
+        return view('posts.edit')->withPost($post)->withCategories($cats)->withTags($tags2);
 	}
 
 	/**
@@ -170,6 +191,18 @@ class PostController extends Controller {
 
 
         $post->save();
+
+//        todo important  dd() & Log::info
+//        dd(is_null($request->tags));
+//        Log::info('LogInfo>>>is_null($request->tags&empty($request->tags:: ',['isset'=>is_null($request->tags),'empty'=>empty($request->tags)]);
+
+        if(!is_null($request->tags)){
+                                                // override true default, false
+            $post->tags()->sync($request->tags);
+        }else{
+                            // delete all post_id from post_tag table
+            $post->tags()->sync(array());
+        }
 
         // set flast data with success message
         Session::flash('success', 'This post was successfully saved.');

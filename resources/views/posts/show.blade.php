@@ -14,6 +14,16 @@
             --}}
             {{--<p class="lead">{!! nl2br($post->body) !!} </p>--}}
             <p class="lead">{!! str_replace("\n","<br/>", $post->body) !!} </p>
+
+            <hr>
+
+            {{-- todo important get tags belong to this post
+            https://www.youtube.com/watch?v=BNUYaLWdR04&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx&index=43
+            --}}
+            @foreach($post->tags as $tag)
+                <span class="label label-default">{{ $tag->name }}</span>
+                @endforeach
+
         </div>
 
         {{--https://www.youtube.com/watch?v=tXq4J2siGew&index=18&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx--}}

@@ -9,6 +9,8 @@
 @section('stylesheets')
     {{--<link rel="stylesheet" href="{{ url() }}/css/parsley.css" >--}}
     {!! Html::style('css/parsley.css') !!}
+    {{--https://www.youtube.com/watch?v=BNUYaLWdR04&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx&index=43--}}
+    {!! Html::style('css/select2.min.css') !!}
     @endsection
 
 @section('content')
@@ -34,6 +36,16 @@
                         @endforeach
                 </select>
 
+                {{--https://www.youtube.com/watch?v=BNUYaLWdR04&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx&index=43--}}
+                {{--using select2--}}
+                {!! Form::label('tags', 'Tags:') !!}
+                <select name="tags[]" id="tags" class="form-control select2-multi" multiple="multiple">
+                    @foreach($tags as $tag)
+                        <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                    @endforeach
+                </select>
+
+
                 {!! Form::label('body', 'Post Body:') !!}
                 {!! Form::textarea('body', null, array('class'=>'form-control', 'required'=>'', 'maxlength'=>'255')) !!}
 
@@ -48,11 +60,17 @@
     {{--https://www.youtube.com/watch?v=JmvHTg0sy6o&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx&index=14--}}
     {{--<script src="{{ url() }}/js/parsley.min.js"></script>--}}
     {!! Html::script('js/parsley.min.js') !!}
+    {{--using select2--}}
+    {!! Html::script('js/select2.min.js') !!}
 
     {{--Localization--}}
     {!! Html::script('js/i18n/ko.js') !!}
 
     <script type="text/javascript">
         $('#form').parsley();
+
+//        https://www.youtube.com/watch?v=BNUYaLWdR04&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx&index=43
+//        using select2
+        $('.select2-multi').select2();
     </script>
     @endsection

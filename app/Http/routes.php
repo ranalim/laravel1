@@ -56,6 +56,10 @@ Route::group(['middleware'=>['web']], function(){
                                                         // only => []
     Route::resource('categories', 'CategoryController', ['except'=>['create']]);
 
+    // Tags
+//    https://www.youtube.com/watch?v=mL_7im7CBOE&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx&index=42
+    Route::resource('tags', 'TagController', ['except'=>['create']]);
+
 
 //    https://www.youtube.com/watch?v=VqewG1lcjKw&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx&index=28
     Route::get('blog/{slug}', [

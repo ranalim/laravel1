@@ -3,7 +3,11 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+
+//https://www.youtube.com/watch?v=mL_7im7CBOE&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx&index=42
 
 class TagController extends Controller {
     //todo  this makes authentication enable
@@ -20,16 +24,8 @@ class TagController extends Controller {
 	public function index()
 	{
 		//
-	}
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
+        $tags = Tag::all();
+        return view('tags.index')->withTags($tags);
 	}
 
 	/**
@@ -37,9 +33,21 @@ class TagController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(Request $request)
 	{
 		//
+        $this->validate($request, array(
+            'name' => 'required|max:255'
+        ));
+
+        $tag = new Tag;
+        $tag->name = $request->name;
+        $tag->save();
+
+        Session::flash('success', 'New Tag was succesfully created!');
+
+        return redirect()->route('tags.index');
+
 	}
 
 	/**
