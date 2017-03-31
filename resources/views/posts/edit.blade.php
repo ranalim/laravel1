@@ -18,6 +18,13 @@
             {!! Form::label('slug', 'Slug:', ['class'=>'form-spacing-top']) !!}
             {!! Form::text('slug', null, ['class'=>'form-control ', 'required'=>'', 'minlength'=>'5', 'maxlength'=>'255']) !!}
 
+            {{--
+            https://www.youtube.com/watch?v=Bo3m_h0QYkU&index=39&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx
+            --}}
+            {!! Form::label('category_id', "Category:" ,['class'=>'form-spacing-top']) !!}
+                                        {{--array key and value--}}
+            {!! Form::select('category_id', $categories, null, ['class'=>'form-control']) !!}
+
             {!! Form::label('body', 'Post Body:', ['class'=>'form-spacing-top']) !!}
             {!! Form::textarea('body', null, ['class'=>'form-control']) !!}
 

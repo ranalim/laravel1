@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="travel@localhost">
-  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.0">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.1">
     <root id="1"/>
     <schema id="2" parent="1" name="travel">
       <Current>1</Current>
@@ -19,150 +19,199 @@
     <schema id="13" parent="1" name="simple_cms"/>
     <schema id="14" parent="1" name="sys"/>
     <table id="15" parent="2" name="about"/>
-    <table id="16" parent="2" name="migrations"/>
-    <table id="17" parent="2" name="password_resets"/>
-    <table id="18" parent="2" name="posts"/>
-    <table id="19" parent="2" name="users"/>
-    <column id="20" parent="15" name="id">
+    <table id="16" parent="2" name="categories"/>
+    <table id="17" parent="2" name="migrations"/>
+    <table id="18" parent="2" name="password_resets"/>
+    <table id="19" parent="2" name="posts"/>
+    <table id="20" parent="2" name="users"/>
+    <column id="21" parent="15" name="id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="21" parent="15" name="song">
+    <column id="22" parent="15" name="song">
       <Position>2</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="22" parent="15" name="singer">
+    <column id="23" parent="15" name="singer">
       <Position>3</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="23" parent="15" name="composer">
+    <column id="24" parent="15" name="composer">
       <Position>4</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="24" parent="15" name="publisher">
+    <column id="25" parent="15" name="publisher">
       <Position>5</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="25" parent="15" name="PRIMARY">
+    <key id="26" parent="15" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="26" parent="16" name="migration">
-      <Position>1</Position>
-      <DataType>varchar(255)|0</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="27" parent="16" name="batch">
-      <Position>2</Position>
-      <DataType>int(11)|0</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="28" parent="17" name="email">
-      <Position>1</Position>
-      <DataType>varchar(255)|0</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="29" parent="17" name="token">
-      <Position>2</Position>
-      <DataType>varchar(255)|0</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="30" parent="17" name="created_at">
-      <Position>3</Position>
-      <DataType>timestamp|0</DataType>
-      <NotNull>1</NotNull>
-      <DefaultExpression>&apos;0000-00-00 00:00:00&apos;</DefaultExpression>
-    </column>
-    <index id="31" parent="17" name="password_resets_email_index">
-      <ColNames>email</ColNames>
-    </index>
-    <index id="32" parent="17" name="password_resets_token_index">
-      <ColNames>token</ColNames>
-    </index>
-    <column id="33" parent="18" name="id">
+    <column id="27" parent="16" name="id">
       <Position>1</Position>
       <DataType>int(10) unsigned|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="34" parent="18" name="title">
+    <column id="28" parent="16" name="name">
       <Position>2</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="35" parent="18" name="body">
+    <column id="29" parent="16" name="created_at">
       <Position>3</Position>
-      <DataType>text|0</DataType>
+      <DataType>timestamp|0</DataType>
       <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0000-00-00 00:00:00&apos;</DefaultExpression>
     </column>
-    <column id="36" parent="18" name="created_at">
+    <column id="30" parent="16" name="updated_at">
       <Position>4</Position>
       <DataType>timestamp|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;0000-00-00 00:00:00&apos;</DefaultExpression>
     </column>
-    <column id="37" parent="18" name="updated_at">
-      <Position>5</Position>
+    <key id="31" parent="16" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="32" parent="17" name="migration">
+      <Position>1</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="33" parent="17" name="batch">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="34" parent="18" name="email">
+      <Position>1</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="35" parent="18" name="token">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="36" parent="18" name="created_at">
+      <Position>3</Position>
       <DataType>timestamp|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;0000-00-00 00:00:00&apos;</DefaultExpression>
     </column>
-    <key id="38" parent="18" name="PRIMARY">
-      <ColNames>id</ColNames>
-      <Primary>1</Primary>
-    </key>
+    <index id="37" parent="18" name="password_resets_email_index">
+      <ColNames>email</ColNames>
+    </index>
+    <index id="38" parent="18" name="password_resets_token_index">
+      <ColNames>token</ColNames>
+    </index>
     <column id="39" parent="19" name="id">
       <Position>1</Position>
       <DataType>int(10) unsigned|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="40" parent="19" name="name">
+    <column id="40" parent="19" name="title">
       <Position>2</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="41" parent="19" name="email">
+    <column id="41" parent="19" name="body">
       <Position>3</Position>
-      <DataType>varchar(255)|0</DataType>
+      <DataType>text|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="42" parent="19" name="password">
-      <Position>4</Position>
-      <DataType>varchar(60)|0</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="43" parent="19" name="remember_token">
-      <Position>5</Position>
-      <DataType>varchar(100)|0</DataType>
-    </column>
-    <column id="44" parent="19" name="created_at">
+    <column id="42" parent="19" name="created_at">
       <Position>6</Position>
       <DataType>timestamp|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;0000-00-00 00:00:00&apos;</DefaultExpression>
     </column>
-    <column id="45" parent="19" name="updated_at">
+    <column id="43" parent="19" name="updated_at">
       <Position>7</Position>
       <DataType>timestamp|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;0000-00-00 00:00:00&apos;</DefaultExpression>
     </column>
-    <index id="46" parent="19" name="users_email_unique">
-      <ColNames>email</ColNames>
+    <column id="44" parent="19" name="slug">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="45" parent="19" name="category_id">
+      <Position>5</Position>
+      <DataType>int(10) unsigned|0</DataType>
+    </column>
+    <index id="46" parent="19" name="posts_slug_unique">
+      <ColNames>slug</ColNames>
       <Unique>1</Unique>
     </index>
     <key id="47" parent="19" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="48" parent="19" name="users_email_unique">
+    <key id="48" parent="19" name="posts_slug_unique">
+      <ColNames>slug</ColNames>
+      <UnderlyingIndexName>posts_slug_unique</UnderlyingIndexName>
+    </key>
+    <column id="49" parent="20" name="id">
+      <Position>1</Position>
+      <DataType>int(10) unsigned|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="50" parent="20" name="name">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="51" parent="20" name="email">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="52" parent="20" name="password">
+      <Position>4</Position>
+      <DataType>varchar(60)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="53" parent="20" name="remember_token">
+      <Position>5</Position>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <column id="54" parent="20" name="created_at">
+      <Position>6</Position>
+      <DataType>timestamp|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0000-00-00 00:00:00&apos;</DefaultExpression>
+    </column>
+    <column id="55" parent="20" name="updated_at">
+      <Position>7</Position>
+      <DataType>timestamp|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0000-00-00 00:00:00&apos;</DefaultExpression>
+    </column>
+    <index id="56" parent="20" name="users_email_unique">
+      <ColNames>email</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="57" parent="20" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="58" parent="20" name="users_email_unique">
       <ColNames>email</ColNames>
       <UnderlyingIndexName>users_email_unique</UnderlyingIndexName>
     </key>

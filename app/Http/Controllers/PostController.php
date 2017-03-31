@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Category;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -45,7 +46,10 @@ class PostController extends Controller {
 	public function create()
 	{
 		// https://www.youtube.com/watch?v=El4yziFuygQ&index=12&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx
-        return view('posts.create');
+
+//        https://www.youtube.com/watch?v=Bo3m_h0QYkU&index=39&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx
+        $categories = Category::all();
+        return view('posts.create')->withCategories($categories);
 	}
 
     /**
@@ -61,9 +65,10 @@ class PostController extends Controller {
 
         // validate the data (how to prevent SQL injection)
             $this->validate($request, array(
-                'title'=>'required|max:255',
-                'slug'=>'required|alpha_dash|min:5|max:255|unique:posts,slug',
-                'body'=>'required'
+                'title' => 'required|max:255',
+                'slug' => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
+                'category_id' => 'required|integer',
+                'body' => 'required'
             ));
 
         // store in the database
@@ -73,6 +78,8 @@ class PostController extends Controller {
 //        https://www.youtube.com/watch?v=mM2bZiD06A0&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx&index=27
         $post->slug = $request->slug;
         $post->body = $request->body;
+//        https://www.youtube.com/watch?v=Bo3m_h0QYkU&index=39&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx
+        $post->category_id = $request->category_id;
 
         $post->save();
 
@@ -114,8 +121,16 @@ class PostController extends Controller {
         //find the post in the database and save as a var
         $post = Post::find($id);
 
+//        https://www.youtube.com/watch?v=Bo3m_h0QYkU&index=39&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx
+        $categories = Category::all();
+        $cats = array();
+        foreach ($categories as $category){
+//            key and value
+            $cats[$category->id] = $category->name;
+        }
+
         // return the view and pass in the var we previously created
-        return view('posts.edit')->withPost($post);
+        return view('posts.edit')->withPost($post)->withCategories($cats);
 	}
 
 	/**
@@ -132,13 +147,15 @@ class PostController extends Controller {
         $post = Post::find($id);
         if($request->input('slug')==$post->slug){
             $this->validate($request, array(
-                'title'=>'required|max:255',
-                'body'=>'required'
+                'title' => 'required|max:255',
+                'category_id' => 'required|integer',
+                'body' => 'required'
             ));
         }else{
             $this->validate($request, array(
                 'title'=>'required|max:255',
                 'slug'=>'required|alpha_dash|min:5|max:255|unique:posts,slug',
+                'category_id' => 'required|integer',
                 'body'=>'required'
             ));
         }
@@ -148,7 +165,9 @@ class PostController extends Controller {
 
         $post->title = $request->input('title');
         $post->slug = $request->input('slug');
+        $post->category_id = $request->input('category_id');
         $post->body = $request->input('body');
+
 
         $post->save();
 

@@ -9,11 +9,16 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use Illuminate\Support\Facades\Config;
 
 class PagesController extends Controller{
 
     public function getInit(){
-        return "You are in Init page";
+        $value = Config::get('app.timezone');
+        $date = new \DateTime();
+        $localtime = $date->format('Y m d h:i:s a');
+        return 'TimeZone test:: '.$value.'  Current Time:: '.$localtime.'<br/>';
+//        return "You are in Init page";
     }
 
     public function getIndex(){

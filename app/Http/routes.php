@@ -51,6 +51,12 @@ Route::group(['middleware'=>['web']], function(){
     Route::post('password/email', 'Auth\PasswordController@sendResetLink');
     Route::post('password/reset', 'Auth\PasswordController@postReset');
 
+    // Categories
+//    https://www.youtube.com/watch?v=YddUdqX-nCI&index=38&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx
+                                                        // only => []
+    Route::resource('categories', 'CategoryController', ['except'=>['create']]);
+
+
 //    https://www.youtube.com/watch?v=VqewG1lcjKw&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx&index=28
     Route::get('blog/{slug}', [
         'as'=>'blog.single',

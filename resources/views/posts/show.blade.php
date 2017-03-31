@@ -24,6 +24,12 @@
                     {{--https://www.youtube.com/watch?v=VqewG1lcjKw&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx&index=28--}}
                     <p><a href="{{ route('blog.single', $post->slug) }}">{{ url('blog/'.$post->slug) }}</a></p>
                 </dl>
+
+                {{--https://www.youtube.com/watch?v=Bo3m_h0QYkU&index=39&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx--}}
+                <dl class="dl-horizontal">
+                    <label>Category:</label>
+                    <p>{{ $post->category->name }}</p>
+                </dl>
                 <dl class="dl-horizontal">
                     <label>Created At:</label>
                     <p>{{ date('M j, Y h:ia', strtotime($post->created_at)) }}</p>

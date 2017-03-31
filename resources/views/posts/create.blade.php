@@ -24,6 +24,16 @@
                 {!! Form::label('slug', 'Slug:') !!}
                 {!! Form::text('slug', null, ['class'=>'form-control', 'required'=>'', 'minlength'=>'5', 'maxlength'=>'255']) !!}
 
+                {{--
+                https://www.youtube.com/watch?v=Bo3m_h0QYkU&index=39&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx
+                --}}
+                {!! Form::label('category_id', 'Category:') !!}
+                <select name="category_id" id="category_id" class="form-control">
+                    @foreach($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
+                </select>
+
                 {!! Form::label('body', 'Post Body:') !!}
                 {!! Form::textarea('body', null, array('class'=>'form-control', 'required'=>'', 'maxlength'=>'255')) !!}
 
